@@ -1,0 +1,34 @@
+.side-header
+    h2= theme.title ? theme.title : config.title ? config.title : ""
+    h4= theme.description ? theme.description : config.description ? config.description : ""
+.side-nav
+    p
+        a(href="#/!index/")= __('Home')
+    p
+        a(href="#/!page/archives")= __('Archive')
+    include ../mixins
+    +make_page_links()
+    p
+        a(href="https://www.keep.moe/") Keep.moe
+div
+    p.soc
+        if theme.github
+            a.no-uline(href="https://github.com/" + theme.github, target="_blank")
+                i.fa.fa-github &nbsp;
+        if theme.twitter
+            a.no-uline(href="https://twitter.com/" + theme.twitter, target="_blank")
+                i.fa.fa-twitter &nbsp;
+        if theme.instagram
+            a.no-uline(href="https://www.instagram.com/" + theme.instagram, target="_blank")
+                i.fa.fa-instagram &nbsp;
+        if theme.weibo
+            a.no-uline(href="http://weibo.com/u/" + theme.weibo, target="_blank")
+                i.fa.fa-weibo &nbsp;
+        if theme.rss
+            a.no-uline(href=config.url + "/" + theme.rss, target="_blank")
+                i.fa.fa-rss &nbsp;
+
+div.visible-lg.visible-md
+    br.site-nav-footer-br
+    div#laptop-footer
+        include footer

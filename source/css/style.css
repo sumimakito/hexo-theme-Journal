@@ -1,0 +1,451 @@
+/*
+DO NOT USE THIS FILE IN THE THEME, MODIFIED FOR THE LANDING PAGE
+–– Makito
+ */
+/*@import url('//fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro:100,300,400,600|Tinos');*/
+html,
+body,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "PingFang SC", "PingFang HK", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Source Sans Pro", sans-serif;
+}
+
+* {
+
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-default {
+    background: transparent;
+    border: none;
+    padding: 0 20px;
+}
+
+.navbar-nav {
+    float: right;
+    margin-left: auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+figure {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+figure > table {
+    width: 100%;
+}
+
+pre * {
+    font-family: Monaco, Menlo, "Source Code Pro", monospace;
+}
+
+figure .gutter pre {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right: none;
+    text-align: right;
+    min-width: 3em;
+}
+
+figure .code {
+    width: 99%;
+}
+
+figure .code pre {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-left: solid rgba(0, 0, 0, 0.05) 1px;
+    margin-right: 1px;
+}
+
+#mighty-stage {
+    height: 100vh;
+    width: 100vw;
+    -webkit-overflow-scrolling: touch;
+}
+
+#stage {
+    float: right;
+    width: 78%;
+!important;
+    padding: 0 80px;
+}
+
+.pagination {
+    padding: 0 15px;
+    width: 100%;
+    text-align: center;
+}
+
+#side-bar {
+    text-align: right;
+    width: 22%;
+    min-width: 300px;
+    height: 100vh;
+    padding: 8vh 40px;
+    position: fixed;
+    top: 0;
+    background: #dcdcdc;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+#dynamic-loaded-post-list{
+    transition: all 0.5s ease-in-out;
+}
+
+#content-container {
+    padding: 8vh 20px;
+}
+
+.no-uline {
+    border-bottom: none;
+}
+
+.text-uline {
+    border-bottom: 2px solid #000;
+}
+
+.soc * {
+    padding-left: 5px;
+    text-decoration: none;
+}
+
+.soc :first-child {
+    padding-left: 0;
+}
+
+.text-uline-strong {
+    border-bottom: 3px solid #000;
+}
+
+.side-nav * {
+    display: contents;
+    text-decoration: none !important;
+}
+
+.side-nav p {
+    padding-left: 5px;
+}
+
+.side-nav :first-child {
+    padding-left: 0;
+}
+
+.side-header {
+
+}
+
+.side-footer {
+}
+
+.card-container {
+    padding: 15px;
+}
+
+.row {
+    margin: 0;
+}
+
+.zero-margin {
+    margin: 0;
+}
+
+.nav > li > a {
+    padding: 15px 0;
+    margin: 5px;
+}
+
+a {
+    color: #333;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #444;
+    text-decoration: underline;
+}
+
+a:focus {
+    text-decoration: underline;
+}
+
+a:visited {
+    text-decoration: underline;
+}
+
+#page-loading-progress {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+}
+
+.card-1 {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), inset 0 -50000px 400px -50000px rgba(0, 0, 0, 0.7);
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+    min-height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), inset 0 -50000px 400px -50000px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+    height: 320px;
+    background-color: #2e6da4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.card:hover {
+    transform: scale(0.98);
+}
+
+.card-img {
+    position: relative;
+}
+
+.desc {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    color: #fff;
+}
+
+.desc :last-child {
+    margin-bottom: 0;
+}
+
+.bg-aquamarine {
+    background: aquamarine;
+}
+
+.bottom-bar {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    background: #fcfcfc;
+    border-top: solid 1px rgba(0, 0, 0, .1);
+}
+
+.bottom-bar a {
+    font-size: 30px;
+    padding: 20px;
+}
+
+.ic-large {
+    font-size: 24px;
+}
+
+.ic-with-shadow {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#mobile-footer {
+    padding: 0 20px 10px 20px;
+}
+
+#modal-container {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    background: rgba(0, 0, 0, .5);
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
+#modal {
+    background: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    max-width: 768px !important;
+    padding-left: 0;
+    padding-right: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+#modal-xs-control-container {
+    position: absolute;
+    top: 0;
+    padding: 20px;
+    color: #fff;
+}
+
+#modal-xs-control-container * {
+    cursor: hand;
+    cursor: pointer;
+}
+
+#modal-title {
+    position: relative;
+}
+
+#modal-title-line {
+    font-size: 20px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 99%;
+}
+
+#modal-header {
+    position: relative;
+    padding: 0 5px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 320px;
+    width: 100%;
+    background-color: #2e6da4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease-in-out;
+    box-shadow: inset 0 -50000px 400px -50000px rgba(0, 0, 0, 0.7);
+}
+
+#modal-body {
+    padding: 20px 25px;
+    transition: all 0.5s ease-in-out;
+}
+
+#modal-progress {
+    padding: 20px 20px 40px 20px;
+    width: 100%;
+}
+
+#modal-progress > .progress-line {
+    width: 300px;
+}
+
+hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1300px) {
+    #stage {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .card {
+        height: 260px;
+    }
+
+    #modal-header {
+        height: 300px;
+    }
+}
+
+@media (max-width: 1130px) {
+    #side-bar {
+        text-align: left;
+        background: none;
+        width: 100%;
+        position: relative;
+        height: unset;
+        padding: 5px 20px;
+    }
+
+    .card-container {
+        padding: 10px;
+    }
+
+    #stage {
+        width: 100%;
+        padding: 0;
+    }
+
+    .side-nav * {
+        display: inline-block;
+    }
+
+    .card {
+        height: 240px;
+    }
+
+    #content-container {
+        padding: 0 10px;
+    }
+
+    #modal-header {
+        height: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    #mighty-stage {
+        height: unset;
+        min-height: unset;
+    }
+
+    #side-bar {
+        position: relative;
+        height: unset;
+    }
+
+    .card {
+        height: 210px;
+    }
+
+    #content-container {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    #modal-header {
+        height: 260px;
+        border-radius: 0;
+    }
+
+    #modal {
+        border-radius: 0;
+        width: 100%;
+        height: auto;
+        min-height: calc(100vh + 1px);
+        padding-left: 0;
+        padding-right: 0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    #modal-container {
+        position: relative;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: auto;
+        min-height: unset;
+    }
+
+}

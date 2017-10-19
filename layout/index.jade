@@ -1,0 +1,55 @@
+if page.current == 1
+    doctype html
+    html(lang="zh-CN")
+        head
+            include partial/head
+        body
+            div#app
+                div.progress-line#page-loading-progress(style="")
+                #mighty-stage
+                    #side-bar
+                        include partial/sidebar
+                    #stage.container
+                        #content-container
+                            div#dynamic-loaded-post-list
+                                .row
+                                    - page.posts.each(function (item) {
+                                    include mixins
+                                    +make_post(item, false)
+                                    - })
+                                    include mixins
+                                +make_pager("index")
+                        div#mobile-footer(style="display: none")
+                            br
+                            include partial/footer
+                #modal-container(style="display: none")
+                    #modal.container
+                        #modal-header(style="background-image: url('')")
+                            #modal-xs-control-container.visible-xs
+                                i#modal-close.fa.fa-home.ic-large.ic-with-shadow
+                            .desc
+                                h3#modal-title
+                                p#modal-intro
+                        #modal-body
+                            #modal-progress(align="center")
+                                p 载入中
+                                .progress-line
+                            #modal-body-content(style="display: none")
+
+            script(src= url_for('js/progressbar.js'))
+            script(src= url_for('js/jquery-3.1.0.min.js'))
+            script(src= url_for('js/bootstrap.min.js'))
+            script(src= url_for('js/bootstrap-notify.min.js'))
+            script(src= url_for('js/jquery-migrate-1.2.1.min.js'))
+            script(src= url_for('js/jquery.appear.js'))
+            script(src= url_for('js/google-analytics.js'))
+            script(src= url_for('js/journal.js'))
+            script.
+else
+    .row
+        - page.posts.each(function (item) {
+        include mixins
+        +make_post(item, false)
+        - })
+        include mixins
+    +make_pager("index")

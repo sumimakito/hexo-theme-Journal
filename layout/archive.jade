@@ -1,0 +1,13 @@
+p#jnl_patrial_head_title(style="display: none")!= __("Archive") + " · " + config.title
+
+p#jnl_patrial_head_description(style="display: none")= __("Archive") +' - ' + config.title
+
+p#jnl_patrial_title(style="display: none")= __("Archive") + " · " + config.title
+
+.autopagerize_page_element: .content
+    .archive.animated.fadeInDown
+        ul.list-with-title
+            include mixins
+            +postList()
+    include mixins
+    +make_pager("page")

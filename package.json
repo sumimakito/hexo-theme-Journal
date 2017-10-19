@@ -1,0 +1,23 @@
+{
+    "name": "hexo-theme-journal",
+    "version": "1.0.0",
+    "description": "Moments got piled up.",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SumiMakito/hexo-theme-journal"
+    },
+    "keywords": [
+        "hexo",
+        "theme",
+        "journal"
+    ],
+    "author": "Makito <master@keep.moe> (https://www.keep.moe/)",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/SumiMakito/hexo-theme-journal/issues"
+    },
+    "homepage": "https://github.com/SumiMakito/hexo-theme-journal/README.md",
+    "devDependencies": {},
+    "dependencies": {}
+}

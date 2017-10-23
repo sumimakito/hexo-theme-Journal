@@ -199,7 +199,7 @@ function showModal(cb) {
         mightyStage.show();
     }
     $(window).scrollTop(0);
-    modalContainer.fadeIn(300, function () {
+    modalContainer.fadeIn(600, function () {
         if (window.innerWidth <= 768) {
             mightyStage.hide();
         }
@@ -219,8 +219,13 @@ function hideModal() {
     if (window.innerWidth <= 768) {
         mightyStage.show();
     }
-    modalContainer.fadeOut(300, function () {
+    modalContainer.addClass("modal-transition-patch");
+    if (window.innerWidth <= 768) {
         resetModal();
+    }
+    modalContainer.fadeOut(600, function () {
+        resetModal();
+        modalContainer.removeClass("modal-transition-patch");
     });
     mightyStage.css("overflow-y", "");
 }

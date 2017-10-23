@@ -12,6 +12,9 @@ mixin make_post(item, is_detail)
                                 p= item.intro
                 else
                     .card
+                        .card-texture
+                            - var desc = item.desc || strip_html(item.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 140);
+                            p= desc
                         .desc
                             h3= item.title
                             if item.intro

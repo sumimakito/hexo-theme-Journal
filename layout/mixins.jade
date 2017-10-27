@@ -3,9 +3,9 @@ mixin make_post(item, is_detail)
     - rpath = "#/!post/" + rpath
     if !is_detail
         .col-lg-6.col-md-6.col-sm-6.card-container
-            a(href=rpath)
+            a.a-block(href=rpath)
                 if item.featured_image
-                    .card(style="background-image: url('"+item.path+"/"+item.featured_image+"')")
+                    .card(style="background-image: url('"+item.path+item.featured_image+"')")
                         .desc
                             h3= item.title
                             if item.intro

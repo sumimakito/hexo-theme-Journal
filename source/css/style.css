@@ -2,10 +2,7 @@
 DO NOT USE THIS FILE IN THE THEME, MODIFIED FOR THE LANDING PAGE
 –– Makito
  */
-
-
 /*@import url('//fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro:100,300,400,600|Tinos');*/
-
 html,
 body,
 span,
@@ -19,7 +16,9 @@ h6 {
     font-family: "PingFang SC", "PingFang HK", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Source Sans Pro", sans-serif;
 }
 
-* {}
+* {
+
+}
 
 body {
     -webkit-font-smoothing: antialiased;
@@ -46,7 +45,7 @@ figure {
     -webkit-overflow-scrolling: touch;
 }
 
-figure>table {
+figure > table {
     width: 100%;
 }
 
@@ -82,7 +81,7 @@ figure .code pre {
 #stage {
     float: right;
     width: 78%;
-    !important;
+!important;
     padding: 0 80px;
 }
 
@@ -150,9 +149,12 @@ figure .code pre {
     padding-left: 0;
 }
 
-.side-header {}
+.side-header {
 
-.side-footer {}
+}
+
+.side-footer {
+}
 
 .card-container {
     padding: 15px;
@@ -166,7 +168,7 @@ figure .code pre {
     margin: 0;
 }
 
-.nav>li>a {
+.nav > li > a {
     padding: 15px 0;
     margin: 5px;
 }
@@ -223,11 +225,16 @@ a:visited {
 
 .card-texture {
     color: rgba(255, 255, 255, .3);
-    position: absolute;
+    /*position: absolute;*/
     font-size: 260%;
     margin: -50px -80px;
     transform: rotate(-15deg);
     pointer-events: none;
+    text-decoration: none!important;
+}
+
+.a-block {
+    text-decoration: none!important;
 }
 
 .card:hover {
@@ -278,7 +285,8 @@ a:visited {
     padding: 0 20px 10px 20px;
 }
 
-.modal-transition-patch {}
+.modal-transition-patch {
+}
 
 #modal-container {
     position: fixed;
@@ -286,7 +294,7 @@ a:visited {
     top: 0;
     background: rgba(0, 0, 0, .5);
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
@@ -305,6 +313,8 @@ a:visited {
     padding-left: 0;
     padding-right: 0;
     transition: all 0.5s ease-in-out;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
 }
 
 #modal-xs-control-container {
@@ -355,7 +365,7 @@ a:visited {
     width: 100%;
 }
 
-#modal-progress>.progress-line {
+#modal-progress > .progress-line {
     width: 300px;
 }
 
@@ -369,9 +379,11 @@ hr {
         padding-left: 30px;
         padding-right: 30px;
     }
+
     .card {
         height: 260px;
     }
+
     #modal-header {
         height: 300px;
     }
@@ -386,51 +398,64 @@ hr {
         height: unset;
         padding: 5px 20px;
     }
+
     .card-container {
         padding: 10px;
     }
+
     #stage {
         width: 100%;
         padding: 0;
     }
+
     .side-nav * {
         display: inline-block;
     }
+
     .card {
         height: 240px;
     }
+
     #content-container {
         padding: 0 10px;
     }
+
     #modal-header {
         height: 260px;
     }
 }
 
 @media (max-width: 768px) {
+
     .modal-transition-patch {
         position: fixed !important;
         height: 100vh !important;
     }
+
     #mighty-stage {
         height: unset;
         min-height: unset;
     }
+
     #side-bar {
         position: relative;
         height: unset;
     }
+
     .card {
         height: 210px;
     }
+
     #content-container {
         padding-top: 0;
         padding-bottom: 0;
     }
+
     #modal-header {
         height: 260px;
         border-radius: 0;
     }
+
     #modal {
         border-radius: 0;
         width: 100%;
@@ -440,6 +465,7 @@ hr {
         padding-right: 0;
         transition: all 0.5s ease-in-out;
     }
+
     #modal-container {
         position: relative;
         padding-top: 0;
@@ -447,4 +473,5 @@ hr {
         height: auto;
         min-height: unset;
     }
+
 }

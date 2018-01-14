@@ -1,0 +1,26 @@
+<footer>
+    <p>
+        &copy;&nbsp;<%= new Date().getYear() + 1900 %>&nbsp;<a target="_blank"
+                                                               href="<% config.url %>"><%= theme.author ? theme.author : config.author ? config.author : config.title %></a>
+    </p>
+
+    <% // Please keep the section below and do not make modifications. // %>
+    <p>Theme&nbsp;<a target="_blank"
+                     href="https://github.com/SumiMakito/hexo-theme-journal">Journal.</a>&nbsp;by&nbsp;<a
+                target="_blank" href="https://www.keep.moe">Makito</a>
+    </p>
+    <% // Please keep the section above and do not make modifications. // %>
+
+    <p>
+        Proudly published with&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>
+    </p>
+</footer>
+
+</div>
+</div>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="<%- url_for('js/popper.min.js') %>"></script>
+<script src="<%- url_for('js/bootstrap.min.js') %>"></script>
+<script src=" <%- url_for('js/vue.min.js') %>"></script>
+<script src=" <%- url_for('js/journal.js') %>"></script>

@@ -5,13 +5,13 @@
 }
 
 .progress-line {
-    background-color: #b3d4fc;
+    background-color: #32ac68;
     display: -webkit-flex;
     display: flex;
 }
 
 .progress-line:before {
-    background-color: #3f51b5;
+    background-color: #40db84;
     content: '';
     -webkit-animation: running-progress 1.5s linear infinite;
     animation: running-progress 1.5s linear infinite;

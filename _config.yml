@@ -1,17 +1,8 @@
-title: "Makito's"
-description: "生活觀察筆記"
-keywords:
-
 truncate_len: 160
 
-twitter: sumimakito
 rss: atom.xml
-weibo: 2393492311
-instagram: sumimakito
-github: sumimakito
 
 # Choose the comment service according to your need.
 # Please do not use the two services at the same time.
 livere: # [data-uid] on livere.com
-disqus: makito-blog # [short_name] on disqus.com
-dove: false # FOR FUN ONLY. It is also a way to show that you don't want to enable comments on your site.
+disqus: # [short_name] on disqus.com

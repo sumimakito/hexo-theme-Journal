@@ -1,0 +1,51 @@
+<% include _include/variables.ejs %>
+<%
+config.__title = page.title + " - " + config.title
+config.__description = page.desc || truncate(strip_html(page.content), {
+            length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
+            omission: '...'
+        })
+%>
+<% include _include/head.ejs %>
+
+<div class="row stream-container">
+    <div class="card-container">
+
+        <div class="card card-item clear-border card-top-patch card-clear-hover">
+            <% if(page.featured_image){ %>
+            <div style="background-image: url('<%= config.root + page.path + page.featured_image %>')"
+                 class="card-image card-radius clear-border clear-bottom-border-radius card-image-bigger"></div>
+            <% } %>
+
+            <div class="card-item-container clear-flex-xs">
+                <div class="card-inner-cell">
+                    <h2><%= page.title %></h2>
+
+                    <div>
+                        <p>
+                            <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
+                                <%= date(page.date, "YYYY-MM-DD HH:mm") %>
+                            </time>
+                        </p>
+                    </div>
+
+                    <p class=" post-block-desc">
+                        <%- page.content %>
+                    </p>
+
+                    <% include _include/comments.ejs %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include _include/before_script.ejs %>
+
+<script>
+    $(document).ready(function () {
+        $("#global-loading-indicator").fadeOut(600);
+    });
+</script>
+
+<% include _include/tail.ejs %>

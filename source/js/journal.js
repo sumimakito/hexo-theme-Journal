@@ -1,269 +1,62 @@
-var mightyStage;
-var stage;
-var sideBar;
-var contentContainer;
-var pageLoadingProgress;
-var modal;
-var modalClose;
-var modalHeader;
-var modalContainer;
-var modalBodyContent;
-var modalProgress;
-var modalTitle;
-var modalIntro;
-var indexTitle;
-var cachedIndexPosts;
-var xhr;
-
-function updatePaddings() {
-    if (window.innerWidth > 1130) {
-        $('#mobile-footer').hide();
-        $('#laptop-footer').show();
-        /*
-         sideBar.css("left", stage.paddingLeft);
-         console.log(sideBar.css("left"));
-         contentContainer.css("paddingLeft", sideBar.outerWidth());
-         */
-        mightyStage.show();
-    } else {
-        $('#mobile-footer').show();
-        $('#laptop-footer').hide();
-        /*
-         sideBar.css("left", "unset");
-         contentContainer.css("paddingLeft", "unset");
-         */
-        if (window.innerWidth <= 768) {
-            if (modalContainer.css("display") === "none") {
-                mightyStage.show();
-            } else {
-                mightyStage.hide();
+let app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        tocOpacity: 0,
+    },
+    methods: {
+        sgn(t, x){
+            let k = 1. / (1. - 2 * t);
+            if (x <= t) return 0;
+            else if (x >= 1 - t) return 1;
+            else {
+                return k * (x - t);
             }
-        } else {
-            mightyStage.show();
+        },
+        handleScroll (lazy = false) {
+            if (lazy && window.scrollY === this.scrollY)return;
+            this.scrollY = window.scrollY;
+            this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 1.5))));
+            if (this.navOpacity >= 1) {
+                $('#nav_background').css('opacity', 1);
+                $('#nav_title').css('opacity', 1);
+                $('.toc').fadeIn(500);
+            } else {
+                $('#nav_background').css('opacity', 0);
+                $('#nav_title').css('opacity', 0);
+                $('.toc').fadeOut(500);
+            }
+        },
+        pageHeadHeight(){
+            return this.$refs.pageHead.offsetHeight;
+        },
+        navBarHeight(){
+            return this.$refs.navBar.offsetHeight;
+        },
+    },
+    created(){
+        window.addEventListener('scroll', this.handleScroll);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+    },
+    mounted(){
+        this.handleScroll();
+        if (window._nonDesktop()) {
+            let app_ = this;
+            let workaround = function() {
+                app_.handleScroll(true);
+                setTimeout(workaround, 500);
+            };
+            workaround();
         }
+    },
+    destroyed(){
+        window.removeEventListener('scroll', this.handleScroll);
     }
-
-
-}
-
-function rJump(rpath) {
-    var path = window.location.pathname + "#" + rpath;
-    window.history.pushState(null, "", path);
-    window.location.href = "#" + rpath;
-}
-
-function currPath() {
-    if (window.location.hash.startsWith("#/")) {
-        return window.location.hash.substring(1);
-    } else {
-        return "/";
-    }
-}
-
-function onHashChanged() {
-    // console.log("onHashChanged");
-    if (currPath() === "/") {
-        document.title = indexTitle;
-        hideModal();
-    }
-    else {
-        //document.title = "Route: " + currPath();
-        onModalLoad();
-    }
-}
-
-function onModalLoad() {
-    modalBodyContent.hide();
-    modalProgress.show();
-    // console.log(currPath());
-    if (xhr !== undefined) {
-        xhr.abort();
-    }
-    if (currPath().startsWith("/!post")) {
-        resetModal();
-        // that's a post
-        showModal(function () {
-            var basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/")) + currPath().replace(/(\/\!post)(.*)/g, "$2");
-            xhr = $.ajax({
-                url: basePath + "/index.html",
-                method: "GET"
-            });
-            xhr.done(function (data) {
-                modalBodyContent.html(data);
-                modalBodyContent.show();
-                modalProgress.hide();
-                document.title = $("#jnl_patrial_head_title").text();
-                modalTitle.text($("#jnl_patrial_title").text());
-                var featuredImg = $("#jnl_patrial_featured_image").text();
-                if (featuredImg !== "") {
-                    // console.log(basePath + "/" + featuredImg);
-                    modalHeader.css("background-image", "url('" + basePath + "/" + featuredImg + "')");
-                }
-                var intro = $("#jnl_patrial_intro").text();
-                if (intro !== undefined && intro !== "") {
-                    modalIntro.text(intro);
-                    modalIntro.show();
-                } else {
-                    modalIntro.hide();
-                }
-                // console.log(modalBodyContent.children('img'));
-            });
-            xhr.fail(function (xhr, textStatus, errorThrown) {
-                if (textStatus !== "abort") {
-                    modalBodyContent.html('<h3 align="center">出错了</h3><p align="center">为什么会这样呢？<br>' + errorThrown + '</p><br>');
-                    modalBodyContent.show();
-                    modalProgress.hide();
-                }
-            });
-        });
-    } else if (currPath().startsWith("/!page")) {
-        resetModal();
-        // that's a page
-        showModal(function () {
-            var basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/")) + currPath().replace(/(\/\!page)(.*)/g, "$2");
-            xhr = $.ajax({
-                url: basePath + "/index.html",
-                method: "GET"
-            });
-            xhr.done(function (data) {
-                modalBodyContent.html(data);
-                modalBodyContent.show();
-                modalProgress.hide();
-                document.title = $("#jnl_patrial_head_title").text();
-                modalTitle.text($("#jnl_patrial_title").text());
-                // console.log(basePath + $("#jnl_patrial_featured_image").text());
-                modalHeader.css("background-image", "url('" + basePath + "/" + $("#jnl_patrial_featured_image").text() + "')");
-                var intro = $("#jnl_patrial_intro").text();
-                if (intro !== undefined && intro !== "") {
-                    modalIntro.text(intro);
-                    modalIntro.show();
-                } else {
-                    modalIntro.hide();
-                }
-            });
-            xhr.fail(function (xhr, textStatus, errorThrown) {
-                if (textStatus !== "abort") {
-                    modalBodyContent.html('<h3 align="center">出错了</h3><p align="center">为什么会这样呢？<br>' + errorThrown + '</p><br>');
-                    modalBodyContent.show();
-                    modalProgress.hide();
-                }
-            });
-        });
-    } else if (currPath().startsWith("/!index")) {
-        // that's a page of the index page
-        if (cachedIndexPosts === undefined) {
-            cachedIndexPosts = dynamicLoadedPostList.html();
-        }
-        hideModal();
-        var basePath = currPath().replace(/(\/\!index)(.*)/g, "$2");
-        if (basePath === "/" || basePath === "/1") {
-            rJump("/");
-            dynamicLoadedPostList.html(cachedIndexPosts);
-        } else {
-            pageLoadingProgress.show();
-            dynamicLoadedPostList.css("opacity", 0.5);
-            basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/")) + basePath;
-            xhr = $.ajax({
-                url: basePath + "/index.html",
-                method: "GET"
-            });
-            xhr.done(function (data) {
-                dynamicLoadedPostList.html(data);
-            });
-            xhr.fail(function (xhr, textStatus, errorThrown) {
-                if (textStatus !== "abort") {
-                    $.notify({
-                        // options
-                        message: '載入資源時發生錯誤'
-                    }, {
-                        // settings
-                        type: 'danger'
-                    });
-                }
-            });
-            xhr.always(function () {
-                dynamicLoadedPostList.css("opacity", 1);
-                pageLoadingProgress.fadeOut(800);
-            });
-        }
-    } else {
-        // what r u doing u naughty boy?
-        hideModal();
-    }
-}
-
-function showModal(cb) {
-    if (window.innerWidth <= 768) {
-        mightyStage.hide();
-    } else {
-        mightyStage.show();
-    }
-    $(window).scrollTop(0);
-    modalContainer.fadeIn(600, function () {
-        if (window.innerWidth <= 768) {
-            mightyStage.hide();
-        }
-        cb.call();
-    });
-    mightyStage.css("overflow-y", "hidden");
-}
-
-function resetModal() {
-    modalBodyContent.html("");
-    modalTitle.text("");
-    modalIntro.text("");
-    modalHeader.css("background-image", "");
-}
-
-function hideModal() {
-    if (window.innerWidth <= 768) {
-        mightyStage.show();
-    }
-    modalContainer.addClass("modal-transition-patch");
-    if (window.innerWidth <= 768) {
-        resetModal();
-    }
-    modalContainer.fadeOut(600, function () {
-        resetModal();
-        modalContainer.removeClass("modal-transition-patch");
-    });
-    mightyStage.css("overflow-y", "");
-}
-
-$(document).ready(function () {
-    indexTitle = document.title;
-    mightyStage = $('#mighty-stage');
-    stage = $('#stage');
-    sideBar = $('#side-bar');
-    dynamicLoadedPostList = $('#dynamic-loaded-post-list');
-    pageLoadingProgress = $('#page-loading-progress');
-    modal = $('#modal');
-    modalClose = $('#modal-close');
-    modalHeader = $('#modal-header');
-    modalContainer = $('#modal-container');
-    modalBodyContent = $('#modal-body-content');
-    modalProgress = $('#modal-progress');
-    modalTitle = $('#modal-title');
-    modalIntro = $('#modal-intro');
-    contentContainer = $('#content-container');
-    updatePaddings();
-    modal.click(function (evt) {
-        evt.stopPropagation();
-    });
-    modalClose.click(function (evt) {
-        rJump("/");
-    });
-    modalContainer.click(function (evt) {
-        //hideModal();
-        rJump("/");
-    });
-    $(window).resize(function () {
-        updatePaddings();
-    });
-    window.onpopstate = function (e) {
-        // console.log(e)
-        onHashChanged();
-    };
-    onHashChanged();
-    pageLoadingProgress.fadeOut(800);
 });

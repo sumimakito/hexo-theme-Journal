@@ -1,0 +1,95 @@
+<% include _include/variables.ejs %>
+<% config.__title = __("Tags") + " - " + config.title %>
+<% include _include/head.ejs %>
+
+<div class="row stream-container">
+    <div id="stream_inner_left" class="col-lg-6 col-md-6 col-no-h-padding">
+
+    </div>
+    <div id="stream_inner_right" class="col-lg-6 col-md-6 col-no-h-padding">
+
+    </div>
+</div>
+
+<nav class="pagination pagination-flex outside-padding-patch" role="pagination">
+    <% if (page.prev) { %>
+    <a class="newer-posts pagination-flex-left" href="<%- url_for(page.prev_link) %>">← <%= __('prev') %></a>
+    <% } else { %>
+    <a class="older-posts pagination-flex-right"></a>
+    <% } %>
+    <span class="page-number pagination-flex-center">
+                        <%= __('page_n_of_n', page.current, page.total) %>
+                    </span>
+    <% if (page.next) { %>
+    <a class="older-posts pagination-flex-right" href="<%- url_for(page.next_link) %>"><%= __('next') %> →</a>
+    <% } else { %>
+    <a class="older-posts pagination-flex-right"></a>
+    <% } %>
+</nav>
+
+
+<div id="__pending_tag_item_container" style="display:none">
+    <% site.tags.each(function (item) { %>
+    <div class="card-container">
+        <div class="card card-item clear-border card-top-patch">
+            <a class="a-block" href="<%= url_for(item.path) %>" rel="noopener noreferrer">
+                <div class="card-item-container clear-flex-xs">
+                    <div class="card-inner-cell">
+                        <h4 class="clear-margin"><%= item.name %></h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+<% include _include/before_script.ejs %>
+
+<script>
+    let cachedTagsNodes;
+    let leftContainer;
+    let rightContainer;
+    let lastColumnCount;
+    let loadingIndicator;
+
+    $(document).ready(function () {
+        loadingIndicator = $("#global-loading-indicator");
+
+        lastColumnCount = -1;
+        leftContainer = $('#stream_inner_left');
+        rightContainer = $('#stream_inner_right');
+
+        function reLayoutItems() {
+            // suppress unnecessary re-layouts
+            let columnCount = window.innerWidth < 768 ? 1 : 2;
+            if (columnCount === lastColumnCount)return;
+            loadingIndicator.show();
+            lastColumnCount = columnCount;
+            let leftHeight = 0;
+            let rightHeight = 0;
+            leftContainer.empty();
+            rightContainer.empty();
+            cachedTagsNodes = $("#__pending_tag_item_container").find("> .card-container");
+            for (let i = 0; i < cachedTagsNodes.length; i++) {
+                let item = $(cachedTagsNodes[i]).clone();
+                if (columnCount === 1 || leftHeight <= rightHeight) {
+                    leftContainer.append(item);
+                    leftHeight += item.height();
+                } else {
+                    rightContainer.append(item);
+                    rightHeight += item.height();
+                }
+            }
+            loadingIndicator.fadeOut(600);
+        }
+
+        $(window).resize(function () {
+            reLayoutItems();
+        });
+
+        reLayoutItems();
+    });
+</script>
+
+<% include _include/tail.ejs %>

@@ -15,12 +15,48 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta name="renderer" content="webkit">
+    <noscript>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+    </noscript>
     <link rel="short icon" href="<%- url_for('favicon/favicon.ico') %>" type="image/x-icon">
     <link rel="stylesheet" href="<%- url_for('css/bootstrap.min.css') %>">
     <link rel="stylesheet" href="<%- url_for('css/mprogress.css') %>">
     <link rel="stylesheet" href="<%- url_for('css/open-iconic.min.css') %>">
     <link rel="stylesheet" href="<%- url_for('css/style.css') %>">
     <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="<%- url_for('atom.xml') %>">
+    <script>
+        /*!
+         loadCSS: load a CSS file asynchronously.
+         [c]2014 @scottjehl, Filament Group, Inc.
+         Licensed MIT
+         */
+        function loadCSS( href, before, media ){
+            "use strict";
+            var ss = window.document.createElement( "link" );
+            var ref = before || window.document.getElementsByTagName( "script" )[ 0 ];
+            var sheets = window.document.styleSheets;
+            ss.rel = "stylesheet";
+            ss.href = href;
+            ss.media = "only x";
+            ref.parentNode.insertBefore( ss, ref );
+            function toggleMedia(){
+                var defined;
+                for( var i = 0; i < sheets.length; i++ ){
+                    if( sheets[ i ].href && sheets[ i ].href.indexOf( href ) > -1 ){
+                        defined = true;
+                    }
+                }
+                if( defined ){
+                    ss.media = media || "all";
+                }
+                else {
+                    setTimeout( toggleMedia );
+                }
+            }
+            toggleMedia();
+            return ss;
+        }
+    </script>
 </head>
 <body>
 

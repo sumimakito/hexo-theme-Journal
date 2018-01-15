@@ -1,4 +1,4 @@
-@import url("https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro:400|Montserrat|Anonymous+Pro:400|Material+Icons");
+@import url("");
 
 * {
     font-family: "Source Sans Pro", "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
@@ -12,8 +12,6 @@ body {
     background: #f0f0f0;
 }
 
-/* OVERRIDE */
-
 .nav-background {
     z-index: 988;
     left: 0;
@@ -25,8 +23,6 @@ body {
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
 }
-
-/* END OF OVERRIDE */
 
 #stage {
     text-align: center;
@@ -84,14 +80,20 @@ body {
     border: none;
 }
 
+button:focus {
+    outline: none !important;
+}
+
 .dropdown-menu {
     left: 0;
     float: left;
-    -webkit-transition: all 0.7s ease-in-out;
-    -moz-transition: all 0.7s ease-in-out;
-    -ms-transition: all 0.7s ease-in-out;
-    -o-transition: all 0.7s ease-in-out;
-    transition: all 0.7s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    display: none;
 }
 
 .navbar {
@@ -266,7 +268,7 @@ a {
     height: 240px;
     top: 0;
     left: 0;
-    opacity: .3;
+    opacity: .15;
     background: url("../images/texture_stripe_inv.png") repeat;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -469,6 +471,10 @@ footer > p {
     .nav-icon-group li {
         display: block !important;
         padding: 5px !important;
+    }
+
+    .navbar > .container, .navbar > .container-fluid {
+        justify-content: start !important;
     }
 
     #nav_dropdown_btn {

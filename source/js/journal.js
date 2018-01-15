@@ -1,3 +1,15 @@
+let navCollapseAnimating = false;
+
+function postProcessShuffleList() {
+    let targets = $('.post-process-shuffle').find("> ul");
+    for (let i = 0; i < targets.length; i++) {
+        let target = targets[i];
+        for (let i = target.children.length; i >= 0; i--) {
+            target.appendChild(target.children[Math.random() * i | 0]);
+        }
+    }
+}
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -46,10 +58,35 @@ let app = new Vue({
         };
     },
     mounted(){
+        postProcessShuffleList();
+
+        let collapsedNav = $('#collapsed_nav');
+
+        $('#nav_dropdown_btn').click(function () {
+            if (navCollapseAnimating)return;
+            navCollapseAnimating = true;
+            if (collapsedNav.css('display') === 'none') {
+                collapsedNav.show();
+                setTimeout(function () {
+                    // Painful workaround left by Makito
+                    collapsedNav.css('opacity', 1);
+                }, 5);
+                setTimeout(function () {
+                    navCollapseAnimating = false;
+                }, 300);
+            } else {
+                collapsedNav.css('opacity', 0);
+                setTimeout(function () {
+                    collapsedNav.hide();
+                    navCollapseAnimating = false;
+                }, 300);
+            }
+        });
+
         this.handleScroll();
         if (window._nonDesktop()) {
             let app_ = this;
-            let workaround = function() {
+            let workaround = function () {
                 app_.handleScroll(true);
                 setTimeout(workaround, 500);
             };

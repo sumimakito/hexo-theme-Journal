@@ -18,9 +18,10 @@ config.__description = page.desc || truncate(strip_html(page.content), {
             <% } %>
 
             <div class="card-item-container clear-flex-xs">
-                <div class="card-inner-cell">
+                <div class="card-inner-cell<%= page.shuffle_li ? " post-process-shuffle" : "" %>">
                     <h2><%= page.title %></h2>
 
+                    <% if(page.date && page.date.length > 0) { %>
                     <div>
                         <p>
                             <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
@@ -28,8 +29,9 @@ config.__description = page.desc || truncate(strip_html(page.content), {
                             </time>
                         </p>
                     </div>
+                    <% } %>
 
-                    <p class=" post-block-desc">
+                    <p class="post-block-desc">
                         <%- page.content %>
                     </p>
 

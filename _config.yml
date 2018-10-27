@@ -1,8 +1,11 @@
-truncate_len: 160
+sidebar_title: "Novα<br>Journal."
+sidebar_subtitle: "點滴在此聚集"
+
+truncate_len: 60
 
 rss: atom.xml
 
 # Choose the comment service according to your need.
 # Please do not use the two services at the same time.
-livere: # [data-uid] on livere.com
-disqus: # [short_name] on disqus.com
+livere: # [data-uid] for livere.com
+disqus: # [short_name] for disqus.com

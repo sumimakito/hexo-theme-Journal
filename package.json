@@ -1,8 +1,13 @@
 {
     "name": "hexo-theme-journal",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Moments got piled up.",
     "main": "index.js",
+    "scripts": {
+        "test": "npm run build",
+        "build": "node-sass source/scss/journal.scss -o source/css | postcss source/css/journal.css -u autoprefixer -r",
+        "watch": "node-sass -w source/scss -o source/css | postcss source/css/journal.css -u autoprefixer -r"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/SumiMakito/hexo-theme-journal"
@@ -12,12 +17,19 @@
         "theme",
         "journal"
     ],
-    "author": "Makito <master@keep.moe> (https://www.keep.moe/)",
+    "author": "Makito <sumimakito@hotmail.com> (https://makito.cc/)",
     "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/SumiMakito/hexo-theme-journal/issues"
     },
     "homepage": "https://github.com/SumiMakito/hexo-theme-journal/README.md",
     "devDependencies": {},
-    "dependencies": {}
+    "dependencies": {
+        "autoprefixer": "^9.2.0",
+        "node-sass": "^4.5.3",
+        "postcss": "^7.0.5",
+        "postcss-cli": "^6.0.0",
+        "scss-compile": "^0.1.7",
+        "yamljs": "^0.3.0"
+    }
 }

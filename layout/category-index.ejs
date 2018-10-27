@@ -1,123 +1,42 @@
 <% include _include/variables.ejs %>
-<% config.__title = __("Tags") + " - " + config.title %>
+<% config.__title = __("Categories") + " - " + config.title %>
 <% include _include/head.ejs %>
+<% include _include/container_head.ejs %>
+<% include _include/single_column_head.ejs %>
+<% include _include/side_nav.ejs %>
+<% include _include/extra_nav.ejs %>
 
-<div class="row stream-container">
-    <div id="stream_inner_left" class="col-lg-6 col-md-6 col-no-h-padding">
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="stream_inner_right" class="col-lg-6 col-md-6 col-no-h-padding">
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-container">
-            <div class="card card-item clear-border card-top-patch">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"></h4>
-                        <p class="clear-margin post-block-desc"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="__pending_category_item_container" style="display:none">
-    <% site.categories.each(function (item) { %>
-    <div class="card-container">
-        <div class="card card-item clear-border card-top-patch">
-            <a class="a-block" href="<%= url_for(item.path) %>" rel="noopener noreferrer">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell">
-                        <h4 class="clear-margin"><%= item.name %></h4>
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <a class="a-block">
+            <div class="post-item-wrapper post-item-wrapper-no-hover">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title post-item-title-small">
+                            <%= __("Categories") %>
+                        </div>
                     </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
+        <% site.categories.each(function (item) { %>
+        <a href="<%= config.root + item.path %>" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            <%= item.name %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <% }) %>
     </div>
-    <% }) %>
+
+    <% include _include/single_column_footer.ejs %>
 </div>
 
-<% include _include/before_script.ejs %>
-
-<script>
-    let cachedCategoriesNodes;
-    let leftContainer;
-    let rightContainer;
-    let lastColumnCount;
-    let loadingIndicator;
-
-    $(document).ready(function () {
-        loadingIndicator = $("#global-loading-indicator");
-
-        lastColumnCount = -1;
-        leftContainer = $('#stream_inner_left');
-        rightContainer = $('#stream_inner_right');
-
-        function reLayoutItems() {
-            // suppress unnecessary re-layouts
-            let columnCount = window.innerWidth < 768 ? 1 : 2;
-            if (columnCount === lastColumnCount)return;
-            loadingIndicator.show();
-            lastColumnCount = columnCount;
-            let leftHeight = 0;
-            let rightHeight = 0;
-            leftContainer.empty();
-            rightContainer.empty();
-            cachedCategoriesNodes = $("#__pending_category_item_container").find("> .card-container");
-            for (let i = 0; i < cachedCategoriesNodes.length; i++) {
-                let item = $(cachedCategoriesNodes[i]).clone();
-                if (columnCount === 1 || leftHeight <= rightHeight) {
-                    leftContainer.append(item);
-                    leftHeight += item.height();
-                } else {
-                    rightContainer.append(item);
-                    rightHeight += item.height();
-                }
-            }
-            loadingIndicator.fadeOut(600);
-        }
-
-        $(window).resize(function () {
-            reLayoutItems();
-        });
-
-        reLayoutItems();
-    });
-</script>
+<% include _include/container_tail.ejs %>
 
 <% include _include/tail.ejs %>

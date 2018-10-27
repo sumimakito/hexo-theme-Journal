@@ -1,24 +1,15 @@
-let navCollapseAnimating = false;
+let app;
 
-function postProcessShuffleList() {
-    let targets = $('.post-process-shuffle').find("> ul");
-    for (let i = 0; i < targets.length; i++) {
-        let target = targets[i];
-        for (let i = target.children.length; i >= 0; i--) {
-            target.appendChild(target.children[Math.random() * i | 0]);
-        }
-    }
-}
-
-let app = new Vue({
+app = new Vue({
     el: '#app',
     data: {
         scrollY: 0,
         navOpacity: 0,
-        tocOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
     },
     methods: {
-        sgn(t, x){
+        sgn(t, x) {
             let k = 1. / (1. - 2 * t);
             if (x <= t) return 0;
             else if (x >= 1 - t) return 1;
@@ -26,29 +17,37 @@ let app = new Vue({
                 return k * (x - t);
             }
         },
-        handleScroll (lazy = false) {
-            if (lazy && window.scrollY === this.scrollY)return;
+        handleScroll() {
             this.scrollY = window.scrollY;
-            this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 1.5))));
+            this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+            const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
             if (this.navOpacity >= 1) {
-                $('#nav_background').css('opacity', 1);
-                $('#nav_title').css('opacity', 1);
-                $('.toc').fadeIn(500);
+                navBackground.style.opacity = 1;
+                navTitle.style.opacity = 1;
             } else {
-                $('#nav_background').css('opacity', 0);
-                $('#nav_title').css('opacity', 0);
-                $('.toc').fadeOut(500);
+                navBackground.style.opacity = 0;
+                navTitle.style.opacity = 0;
             }
         },
-        pageHeadHeight(){
-            return this.$refs.pageHead.offsetHeight;
+        handleResize() {
+            const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+            extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
         },
-        navBarHeight(){
+        navBarHeight() {
             return this.$refs.navBar.offsetHeight;
         },
+        pageHeadHeight() {
+            return this.$refs.pageHead.offsetHeight;
+        },
+        toggleDrawer() {
+            this.isDrawerOpen = !this.isDrawerOpen;
+            document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+        },
     },
-    created(){
+    created() {
         window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
         window._nonDesktop = function () {
             let check = false;
             (function (a) {
@@ -57,43 +56,15 @@ let app = new Vue({
             return check;
         };
     },
-    mounted(){
-        postProcessShuffleList();
-
-        let collapsedNav = $('#collapsed_nav');
-
-        $('#nav_dropdown_btn').click(function () {
-            if (navCollapseAnimating)return;
-            navCollapseAnimating = true;
-            if (collapsedNav.css('display') === 'none') {
-                collapsedNav.show();
-                setTimeout(function () {
-                    // Painful workaround left by Makito
-                    collapsedNav.css('opacity', 1);
-                }, 5);
-                setTimeout(function () {
-                    navCollapseAnimating = false;
-                }, 300);
-            } else {
-                collapsedNav.css('opacity', 0);
-                setTimeout(function () {
-                    collapsedNav.hide();
-                    navCollapseAnimating = false;
-                }, 300);
-            }
-        });
-
+    mounted() {
         this.handleScroll();
-        if (window._nonDesktop()) {
-            let app_ = this;
-            let workaround = function () {
-                app_.handleScroll(true);
-                setTimeout(workaround, 500);
-            };
-            workaround();
-        }
+        this.handleResize();
+        this.mounted = true;
     },
-    destroyed(){
+    destroyed() {
         window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
     }
 });
+
+new SmoothScroll('a#globalBackToTop');

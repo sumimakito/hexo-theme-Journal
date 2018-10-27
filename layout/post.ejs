@@ -1,76 +1,69 @@
 <% include _include/variables.ejs %>
 <%
 config.__title = page.title + " - " + config.title
-config.__description = page.desc || truncate(strip_html(page.content), {
-            length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
-            omission: '...'
-        })
+config.__desc = page.intro || page.desc || truncate(strip_html(page.content), {
+    length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
+    omission: '...'
+})
 %>
 <% include _include/head.ejs %>
+<% include _include/container_head.ejs %>
+<% include _include/single_column_head.ejs %>
+<% include _include/side_nav.ejs %>
+<% var noPager = true; %>
+<% include _include/extra_nav.ejs %>
 
-<div class="row stream-container">
-    <div class="card-container">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="<%= page.featured_image ? 'post-head-wrapper' : 'post-head-wrapper-text-only' %>"
+                 style="background-image: url('<%= page.featured_image ? (config.root + page.path + page.featured_image) : '' %>')">
+                <div class="post-title">
+                    <%= page.title %>
+                    <div class="post-meta">
+                        <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
+                            <%= date(page.date, "YYYY-MM-DD HH:mm") %>
+                        </time>&nbsp;
+                        <% if (page.categories && page.categories.length){ %>
+                        <% count = page.categories.length %>
+                        <i class="material-icons" style="">folder</i>
+                        <% page.categories.forEach(function(category, index) { %>
+                        <a href='<%= config.root + category.path %>'><%= category.name %></a><%= (count !== index + 1) ? ', ' : '' %>
+                        <% }); %>
+                        <% } %>
 
-        <div class="card card-item clear-border card-top-patch card-clear-hover">
-            <% if(page.featured_image){ %>
-            <div style="background-image: url('<%= config.root + page.path + page.featured_image %>')"
-                 class="card-image card-radius clear-border clear-bottom-border-radius card-image-bigger"></div>
-            <% } %>
-
-            <div class="card-item-container clear-flex-xs">
-                <div class="card-inner-cell">
-                    <h2><%= page.title %></h2>
-
-                    <div>
-                        <p>
-                            <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
-                                <%= date(page.date, "YYYY-MM-DD HH:mm") %>
-                            </time>
-                            <% if (page.categories && page.categories.length){ %>
-                            <% count = page.categories.length %>
-                            <span class="oi" data-glyph="folder"
-                                  style="vertical-align: middle; margin-left: 5px"> </span>&nbsp;
-                            <% page.categories.forEach(function(category, index) { %>
-                            <a href='<%= config.root + category.path %>'><%= category.name %></a>
-                            <% if (count !== index + 1) { %>
-                            ,
-                            <% } %>
-                            <% }); %>
-                            <% } %>
-
-                            <% if (page.tags && page.tags.length){ %>
-                            <% count = page.tags.length %>
-                            <span class="oi" data-glyph="tag" style="vertical-align: middle; margin-left: 5px"> </span>&nbsp;
-                            <% page.tags.forEach(function(tag, index) { %>
-                            <a href='<%= config.root + tag.path %>'><%= tag.name %></a>
-                            <% if (count !== index + 1) { %>
-                            ,
-                            <% } %>
-                            <% }); %>
-                            <% } %>
-                        </p>
+                        <% if (page.tags && page.tags.length){ %>
+                        <% count = page.tags.length %>
+                        <i class="material-icons" style="">label</i>
+                        <% page.tags.forEach(function(tag, index) { %>
+                        <a href='<%= config.root + tag.path %>'><%= tag.name %></a><%= (count !== index + 1) ? ', ' : '' %>
+                        <% }); %>
+                        <% } %>
                     </div>
-
-
-                    <p class=" post-block-desc">
-                        <%- page.content %>
-                    </p>
-
-                    <% include _include/pagination.ejs %>
-
-                    <% include _include/comments.ejs %>
                 </div>
             </div>
+
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <%- page.content %>
+                </div>
+            </div>
+
+            <% include _include/post_pagination.ejs %>
+
+            <% if(!page.no_comments) { %>
+            <% include _include/comment_templates.ejs %>
+            <% } %>
         </div>
     </div>
+
+    <% include _include/single_column_footer.ejs %>
 </div>
 
-<% include _include/before_script.ejs %>
+<% include _include/container_tail.ejs %>
 
-<script>
-    $(document).ready(function () {
-        $("#global-loading-indicator").fadeOut(600);
-    });
-</script>
+<% if(!page.no_comments) { %>
+<% include _include/comment_includes.ejs %>
+<% } %>
 
 <% include _include/tail.ejs %>

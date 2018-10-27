@@ -1,0 +1,13 @@
+<nav class="post-pagination">
+    <% if (page.prev) { %>
+    <a class="newer-posts" href="<%- url_for(page.prev.path) %>">
+        <%= __('prev_post') %><br><%= page.prev.title %>
+    </a>
+    <% } %>
+    <span class="page-number"></span>
+    <% if (page.next) { %>
+    <a class="older-posts" href="<%- url_for(page.next.path) %>">
+        <%= __('next_post') %><br><%= page.next.title %>
+    </a>
+    <% } %>
+</nav>

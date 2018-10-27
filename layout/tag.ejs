@@ -1,100 +1,45 @@
 <% include _include/variables.ejs %>
 <% config.__title = __("Tags") + ": " + page.tag + " - " + config.title %>
 <% include _include/head.ejs %>
+<% include _include/container_head.ejs %>
+<% include _include/single_column_head.ejs %>
+<% include _include/side_nav.ejs %>
+<% include _include/extra_nav.ejs %>
 
-<h3 class="section-title"><%= __("Tags") + ": " + page.tag %></h3>
-
-<div class="row stream-container">
-    <div id="stream_inner_left" class="col-lg-6 col-md-6 col-no-h-padding">
-
-    </div>
-    <div id="stream_inner_right" class="col-lg-6 col-md-6 col-no-h-padding">
-
-    </div>
-</div>
-
-<nav class="pagination pagination-flex outside-padding-patch" role="pagination">
-    <% if (page.prev) { %>
-    <a class="newer-posts pagination-flex-left" href="<%- url_for(page.prev_link) %>">← <%= __('prev') %></a>
-    <% } else { %>
-    <a class="older-posts pagination-flex-right"></a>
-    <% } %>
-    <span class="page-number pagination-flex-center">
-                        <%= __('page_n_of_n', page.current, page.total) %>
-                    </span>
-    <% if (page.next) { %>
-    <a class="older-posts pagination-flex-right" href="<%- url_for(page.next_link) %>"><%= __('next') %> →</a>
-    <% } else { %>
-    <a class="older-posts pagination-flex-right"></a>
-    <% } %>
-</nav>
-
-<div id="__pending_post_item_container" style="display:none">
-    <% page.posts.each(function (item) { %>
-    <div class="card-container">
-        <div class="card card-item clear-border card-top-patch">
-            <a class="a-block" href="<%= config.root + item.path %>" rel="noopener noreferrer">
-                <% if(item.featured_image){ %>
-                <div style="background-image: url('<%= config.root + item.path + item.featured_image %>')"
-                     class="card-image card-radius clear-border clear-bottom-border-radius"></div>
-                <% } %>
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell"><h4 class="clear-margin"><%= item.title %></h4>
-                        <% var desc = item.intro ? item.intro : strip_html(item.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 140); %>
-                        <p class="clear-margin post-block-desc"><%= desc %></p></div>
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <a href="<%= config.root + 'tags/' %>"><%= __("Tags") %></a> / <%= page.tag %>
+                    </div>
                 </div>
-            </a>
+            </div>
         </div>
+        <% page.posts.each(function (item) { %>
+        <a href="<%= config.root + item.path %>" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            <%= item.title %>
+                        </div>
+                        <div class="post-item-meta">
+                            <%= date(item.date, "YYYY-MM-DD") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <% }) %>
+
+        <% include _include/pagination.ejs %>
     </div>
-    <% }) %>
+
+    <% include _include/single_column_footer.ejs %>
 </div>
 
-<% include _include/before_script.ejs %>
-
-<script>
-    let cachedPostsNodes;
-    let leftContainer;
-    let rightContainer;
-    let lastColumnCount;
-    let loadingIndicator;
-
-    $(document).ready(function () {
-        loadingIndicator = $("#global-loading-indicator");
-
-        lastColumnCount = -1;
-        leftContainer = $('#stream_inner_left');
-        rightContainer = $('#stream_inner_right');
-
-        function reLayoutPosts() {
-            // suppress unnecessary re-layouts
-            let columnCount = window.innerWidth < 768 ? 1 : 2;
-            if (columnCount === lastColumnCount)return;
-            loadingIndicator.show();
-            lastColumnCount = columnCount;
-            let leftHeight = 0;
-            let rightHeight = 0;
-            leftContainer.empty();
-            rightContainer.empty();
-            cachedPostsNodes = $("#__pending_post_item_container").find("> .card-container");
-            for (let i = 0; i < cachedPostsNodes.length; i++) {
-                let post = $(cachedPostsNodes[i]).clone();
-                if (columnCount === 1 || leftHeight <= rightHeight) {
-                    leftContainer.append(post);
-                    leftHeight += post.height();
-                } else {
-                    rightContainer.append(post);
-                    rightHeight += post.height();
-                }
-            }
-            loadingIndicator.fadeOut(600);
-        }
-
-        $(window).resize(function () {
-            reLayoutPosts();
-        });
-
-        reLayoutPosts();
-    });
-</script>
+<% include _include/container_tail.ejs %>
 
 <% include _include/tail.ejs %>

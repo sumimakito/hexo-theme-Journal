@@ -1,0 +1,38 @@
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head <%= is_current('/') && 'active' %>" href="<%= config.root %>">
+        <div class="nav-title">
+            <%- theme.sidebar_title ? theme.sidebar_title : config.title %>
+        </div>
+        <div class="nav-subtitle">
+            <%- theme.sidebar_subtitle ? theme.sidebar_subtitle : config.subtitle %>
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        <a class="a-block no-tint nav-link-item <%= is_current('archives') && 'active' %>" href="<%= config.root + "archives" %>">
+            <%= __('Archive') %>
+        </a>
+
+        <% if(site.pages){ %>
+        <% site.pages.each(function (page){ %>
+        <a class="a-block nav-link-item <%= is_current(page.path) && 'active' %>" href="<%= config.root + page.path %>">
+            <%= page.title %>
+        </a>
+        <% });} %>
+
+        <% if (theme.rss) { %>
+        <a class="a-block no-tint nav-link-item" href="<%= config.root + theme.rss %>">
+            <%= __('RSS') %>
+        </a>
+        <% } %>
+    </div>
+
+    <% // Please keep the section below and do not make modifications. //  %>
+    <div class="nav-footer">
+        Proudly published with Hexo<br>
+        <%# Please keep the section below and do not make modifications. %>
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        <%# Please keep the section above and do not make modifications. %>
+        &copy; <%= new Date().getYear() + 1900 %> <a href="<%= config.url %>"><%= config.title %></a>
+    </div>
+</div>

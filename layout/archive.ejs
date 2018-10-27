@@ -5,141 +5,60 @@ config.__title = __('Archive') +
         + " - " + config.title
 %>
 <% include _include/head.ejs %>
+<% include _include/container_head.ejs %>
+<% include _include/single_column_head.ejs %>
+<% include _include/side_nav.ejs %>
+<% include _include/extra_nav.ejs %>
 
-<div id="archive_container">
-
-</div>
-
-<nav class="pagination pagination-flex outside-padding-patch" role="pagination">
-    <% if (page.prev) { %>
-    <a class="newer-posts pagination-flex-left" href="<%- url_for(page.prev_link) %>">← <%= __('prev') %></a>
-    <% } else { %>
-    <a class="older-posts pagination-flex-right"></a>
-    <% } %>
-    <span class="page-number pagination-flex-center">
-                        <%= __('page_n_of_n', page.current, page.total) %>
-                    </span>
-    <% if (page.next) { %>
-    <a class="older-posts pagination-flex-right" href="<%- url_for(page.next_link) %>"><%= __('next') %> →</a>
-    <% } else { %>
-    <a class="older-posts pagination-flex-right"></a>
-    <% } %>
-</nav>
-
-<div id="__pending_post_item_container" style="display:none">
-    <%
-    var groupTag = 0;
-    var firstTag = true;
-    page.posts.each(function (item) {
-        var itemTag = is_month() ? date(item.date, 'MM') : is_year() ? date(item.date, 'MM') : date(item.date, 'YYYY');
-    %>
-    <% if(groupTag !== itemTag){
-    if(!firstTag){
-    %>
-    <%- "</div>" %>
-    <% } %>
-    <%- "<div>" %>
-    <h3 class="section-title">
-        <a href="<%= itemTag %>">
-            <%= is_month() ? date(item.date, 'YYYY/MM') : is_year() ? date(item.date, 'YYYY/MM') : date(item.date, 'YYYY') %>
-        </a>
-    </h3>
-    <% } %>
-
-    <div class="card-container">
-        <div class="card card-item clear-border card-top-patch">
-            <a class="a-block" href="<%= config.root + item.path %>" rel="noopener noreferrer">
-                <div class="card-item-container clear-flex-xs">
-                    <div class="card-inner-cell">
-                        <h4 class="clear-margin"><%= item.title %></h4>
-
-                        <p class=" post-block-desc clear-margin">
-                            <%= date(item.date, 'MM-DD') %>
-                        </p>
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <%
+        var groupTag = 0;
+        page.posts.each(function (item) {
+            var itemTag = is_month() ? date(item.date, 'YYYY/MM') : is_year() ? date(item.date, 'YYYY/MM') : date(item.date, 'YYYY');
+        %>
+        <% if(groupTag !== itemTag){ %>
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <% if(is_month()) { %>
+                        <a href="<%= config.root + 'archives/' + date(item.date, 'YYYY') %>"><%= date(item.date, 'YYYY') %></a> / <%= date(item.date, 'MM') %>
+                        <% } else { %>
+                        <a href="<%= config.root + 'archives/' + itemTag %>">
+                            <%= is_month() ? date(item.date, 'YYYY/MM') : is_year() ? date(item.date, 'YYYY / MM') : date(item.date, 'YYYY') %>
+                        </a>
+                        <% } %>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
+        <% } %>
+
+        <a href="<%= config.root + item.path %>" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            <%= item.title %>
+                        </div>
+                        <div class="post-item-meta">
+                            <%= date(item.date, "YYYY-MM-DD") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <%
+            groupTag = groupTag !== itemTag ? itemTag : groupTag;
+        });
+        %>
     </div>
 
-    <%
-        firstTag = false;
-        groupTag = groupTag !== itemTag ? itemTag : groupTag;
-    });
-    %>
-    <%- "</div>" %>
-
+    <% include _include/single_column_footer.ejs %>
 </div>
 
-<% include _include/before_script.ejs %>
-
-<script>
-    let archiveYearlyNodes;
-    let leftContainer;
-    let rightContainer;
-    let archiveContainer;
-    let lastColumnCount;
-    let loadingIndicator;
-
-    $(document).ready(function () {
-        loadingIndicator = $("#global-loading-indicator");
-
-        lastColumnCount = -1;
-        leftContainer = $('#stream_inner_left');
-        rightContainer = $('#stream_inner_right');
-        archiveContainer = $('#archive_container');
-
-        function reLayoutPosts() {
-            // suppress unnecessary re-layouts
-            let columnCount = window.innerWidth < 768 ? 1 : 2;
-            if (columnCount === lastColumnCount)return;
-            loadingIndicator.show();
-            lastColumnCount = columnCount;
-            archiveContainer.empty();
-            rightContainer.empty();
-            archiveYearlyNodes = $("#__pending_post_item_container").find("> div");
-            for (let i = 0; i < archiveYearlyNodes.length; i++) {
-                let leftHeight = 0;
-                let rightHeight = 0;
-
-                let yearly = $(archiveYearlyNodes[i]).clone();
-                let yearTitle = yearly.children()[0];
-                let yearContainer = $(document.createElement('div'));
-                let yearContainerInner = $(document.createElement('div'));
-                let yearContainerInnerL = $(document.createElement('div'));
-                let yearContainerInnerR = $(document.createElement('div'));
-                yearContainerInner.addClass("row stream-container");
-                yearContainerInnerL.addClass("col-lg-6 col-md-6 col-no-h-padding");
-                yearContainerInnerR.addClass("col-lg-6 col-md-6 col-no-h-padding");
-
-                yearContainerInner.append(yearContainerInnerL).append(yearContainerInnerR);
-                yearContainer.append(yearTitle).append(yearContainerInner);
-                archiveContainer.append(yearContainer);
-
-                let postEntries = yearly.find("> .card-container");
-                for (let j = 0; j < postEntries.length; j++) {
-                    let post = $(postEntries[j]);
-                    if (columnCount === 1 || leftHeight <= rightHeight) {
-                        console.log("Left, +" + post.height());
-                        yearContainerInnerL.append(post);
-                        leftHeight += post.height();
-                    } else {
-                        console.log("Right, +" + post.height());
-                        yearContainerInnerR.append(post);
-                        rightHeight += post.height();
-                    }
-                }
-
-            }
-            loadingIndicator.fadeOut(600);
-        }
-
-        $(window).resize(function () {
-            reLayoutPosts();
-        });
-
-        reLayoutPosts();
-    });
-</script>
+<% include _include/container_tail.ejs %>
 
 <% include _include/tail.ejs %>

@@ -1,54 +1,46 @@
-<% include _include/variables.ejs %>
+[% @extends skeleton.ejs %]
+
+[% @impl OverrideVars %]
 <%
 config.__title = page.title + " - " + config.title
 config.__desc = page.desc || truncate(strip_html(page.content), {
     length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
     omission: '...'
 })
+config.__noPager = true
 %>
-<% include _include/head.ejs %>
-<% include _include/container_head.ejs %>
-<% include _include/single_column_head.ejs %>
-<% include _include/side_nav.ejs %>
-<% var noPager = true; %>
-<% include _include/extra_nav.ejs %>
+[% @end %]
 
-<div ref="streamContainer" class="stream-container">
-    <div class="post-list-container post-list-container-shadow">
-        <div class="post">
-            <div class="<%= page.featured_image ? 'post-head-wrapper' : 'post-head-wrapper-text-only' %>"
-                 style="background-image: url('<%= page.featured_image ? (config.root + page.path + page.featured_image) : '' %>')">
-                <div class="post-title">
-                    <%= page.title %>
-                    <% if(page.date && page.date.length > 0) { %>
-                    <div class="post-meta">
-                        <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
-                            <%= date(page.date, "YYYY-MM-DD HH:mm") %>
-                        </time>
-                    </div>
-                    <% } %>
+[% @impl MainBody %]
+<div class="post-list-container post-list-container-shadow">
+    <div class="post">
+        <div class="<%= page.featured_image ? 'post-head-wrapper' : 'post-head-wrapper-text-only' %>"
+             style="background-image: url('<%= page.featured_image ? (config.root + page.path + page.featured_image) : '' %>')">
+            <div class="post-title">
+                <%= page.title %>
+                <% if(page.date && page.date.length > 0) { %>
+                <div class="post-meta">
+                    <time datetime="<%= date_xml(page.date) %>" itemprop="datePublished">
+                        <%= date(page.date, "YYYY-MM-DD HH:mm") %>
+                    </time>
                 </div>
+                <% } %>
             </div>
-
-            <div class="post-body-wrapper">
-                <div class="post-body">
-                    <%- page.content %>
-                </div>
-            </div>
-
-            <% if(!page.no_comments) { %>
-            <% include _include/comment_templates.ejs %>
-            <% } %>
         </div>
+
+        <div class="post-body-wrapper">
+            <div class="post-body">
+                <%- page.content %>
+            </div>
+        </div>
+
+        <% include _include/comment_templates.ejs %>
     </div>
-
-    <% include _include/single_column_footer.ejs %>
 </div>
+[% @end %]
 
-<% include _include/container_tail.ejs %>
-
+[% @impl CommentsInclude %]
 <% if(!page.no_comments) { %>
 <% include _include/comment_includes.ejs %>
 <% } %>
-
-<% include _include/tail.ejs %>
+[% @end %]

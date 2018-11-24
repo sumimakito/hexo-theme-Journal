@@ -2,9 +2,11 @@ $color-accent: #9f563a;
 $back-container-background: #fcfcfc;
 $front-container-background: #ffffff;
 
-$default-font-list: "source-han-serif-tc", serif;
-$mono-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", monospace;
+$default-font-list: "Lora", "source-han-serif-tc", serif;
+$mono-font-list: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", monospace;
 $sans-preferred-font-list: "Montserrat", "Roboto", "Source Sans Pro", "Helvetica", "Arial", $default-font-list;
+//$default-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", sans-serif;
+//$sans-preferred-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", sans-serif;
 
 $side-container-width: 25%; //280px;
 $extra-container-width: 64px;
@@ -95,6 +97,42 @@ textarea, select, input, button {
 button {
   cursor: hand;
   cursor: pointer;
+}
+
+code {
+  color: $dark-accent;
+  background: rgba($color-accent, 0.07) !important;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: $mono-font-list;
+}
+
+pre {
+  background: rgba($color-accent, 0.07) !important;
+  color: $dark-accent;
+  padding: 12px 15px;
+  border-radius: 5px;
+  font-family: $mono-font-list;
+  * {
+    background: none !important;
+    font-family: $mono-font-list !important;
+  }
+  code {
+    padding: 0;
+  }
+}
+
+blockquote {
+  padding: 10px 20px;
+  border-left: 3px solid rgba($color-accent, 0.7);
+  color: $dark-accent;
+  background: rgba($color-accent, 0.05);
+  p {
+    margin-bottom: 0;
+  }
+  * {
+    color: $dark-accent;
+  }
 }
 
 a {

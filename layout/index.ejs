@@ -1,47 +1,36 @@
-<% include _include/variables.ejs %>
-<% include _include/head.ejs %>
-<% include _include/container_head.ejs %>
-<% include _include/single_column_head.ejs %>
-<% include _include/side_nav.ejs %>
-<% include _include/extra_nav.ejs %>
+[% @extends skeleton.ejs %]
 
-<div ref="streamContainer" class="stream-container">
-    <div class="post-list-container post-list-container-no-background">
-        <% page.posts.each(function (item) { %>
-        <a href="<%= config.root + item.path %>" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-divider">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            <%= item.title %>
-                        </div>
-                        <div class="post-item-summary">
-                            <%= item.intro && item.intro.length > 0 ? item.intro : truncate(strip_html(item.content), {
-                                length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
-                                omission: '...'
-                            }) %>
-                        </div>
-                        <div class="post-item-meta">
-                            <%= date(item.date, "YYYY-MM-DD") %>
-                        </div>
+[% @impl MainBody %]
+<div class="post-list-container post-list-container-no-background">
+    <% page.posts.each(function (item) { %>
+    <a href="<%= config.root + item.path %>" class="a-block">
+        <div class="post-item-wrapper">
+            <div class="post-item post-item-no-divider">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title">
+                        <%= item.title %>
                     </div>
-                    <% if(item.featured_image){ %>
-                    <div class="post-item-image-wrapper">
-                        <div class="post-item-image"
-                             style="background-image: url('<%= config.root + item.path + item.featured_image %>')"></div>
+                    <div class="post-item-summary">
+                        <%= item.intro && item.intro.length > 0 ? item.intro : truncate(strip_html(item.content), {
+                            length: config.truncate_len ? config.truncate_len : theme.truncate_len ? theme.truncate_len : 140,
+                            omission: '...'
+                        }) %>
                     </div>
-                    <% } %>
+                    <div class="post-item-meta">
+                        <%= date(item.date, "YYYY-MM-DD") %>
+                    </div>
                 </div>
+                <% if(item.featured_image){ %>
+                <div class="post-item-image-wrapper">
+                    <div class="post-item-image"
+                         style="background-image: url('<%= config.root + item.path + item.featured_image %>')"></div>
+                </div>
+                <% } %>
             </div>
-        </a>
-        <% }) %>
+        </div>
+    </a>
+    <% }) %>
 
-        <% include _include/pagination.ejs %>
-    </div>
-
-    <% include _include/single_column_footer.ejs %>
+    <% include _include/pagination.ejs %>
 </div>
-
-<% include _include/container_tail.ejs %>
-
-<% include _include/tail.ejs %>
+[% @end %]

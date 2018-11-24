@@ -6,7 +6,7 @@
             </i>
         </a>
 
-        <% if(!noPager) { %>
+        <% if(!config.__noPager) { %>
         <% if(page.current && page.total && page.total > 1) { %>
         <div class="pagination-indicator">
             <span><%= page.current %>/<%= page.total %></span>

@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "npm run build",
-        "build": "node-sass source/scss/journal.scss -o source/css | postcss source/css/journal.css -u autoprefixer -r",
-        "watch": "node-sass -w source/scss -o source/css | postcss source/css/journal.css -u autoprefixer -r"
+        "build": "node-sass source/scss/journal.scss -o source/css --output-style compressed && postcss source/css/journal.css -u autoprefixer -r",
+        "watch": "node-sass -w source/scss -o source/css"
     },
     "repository": {
         "type": "git",

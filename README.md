@@ -19,17 +19,20 @@ Moments piled up.
 
 First, `cd` into your Hexo root directory.
 
-```
-yarn remove hexo-renderer-ejs
-yarn add hexo-renderer-extended-ejs # Journal uses Extended-EJS instead of EJS
+```bash
+yarn add hexo-renderer-ejs
+npm i --save hexo-renderer-ejs # for npm users
 ```
 
-Then, `cd` into `themes`.
-
+```bash
+cd themes
 ```
+
+```bash
 git clone https://github.com/SumiMakito/hexo-theme-Journal.git journal
 cd journal
 yarn install
+npm i # for npm users
 ```
 
 Finally, don't forget to edit the Hexo-level _config.yml and apply Journal theme.

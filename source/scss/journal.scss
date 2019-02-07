@@ -356,7 +356,8 @@ a {
   text-align: right;
   font-family: $sans-preferred-font-list;
   padding: 20px 0 50px 0;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

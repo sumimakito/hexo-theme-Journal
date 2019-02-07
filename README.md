@@ -19,21 +19,52 @@ Moments piled up.
 
 First, `cd` into your Hexo root directory.
 
+#### Installing the EJS renderer
+
+> If you are currently using an EJS-based theme, you can then skip this step.
+
 ```bash
 yarn add hexo-renderer-ejs
 npm i --save hexo-renderer-ejs # for npm users
 ```
 
+#### Cloning the theme
+
 ```bash
 cd themes
-```
-
-```bash
 git clone https://github.com/SumiMakito/hexo-theme-Journal.git journal
 cd journal
-yarn install
-npm i # for npm users
+yarn install # or `npm i` for npm users
 ```
 
-Finally, don't forget to edit the Hexo-level _config.yml and apply Journal theme.
+#### Applying the theme
 
+Find the _config.yml file at your Hexo root directory and apply the theme.
+
+```yaml
+theme: journal
+```
+
+### User Guide
+
+#### About post items
+
+![](arts/post_item.png)
+
+<div align="center"><small>↑ An example of a post item ↑</small></div>
+
+Generally speaking, a post file in source/_posts always begins with a header in the following format.
+
+```yaml
+---
+title: 吾輩は猫である
+intro: 吾輩は猫である。名前はまだない。
+featured_image: neko.jpg
+date: 2018-11-11 12:00:00
+tags: 
+    - Novel
+    - Japanese
+---
+```
+
+Maybe you've already noticed that there're two new fields named `intro` and `featured_image`. These two **optional** fields are used to optimize post items' appearance. If `intro` is set, the value will be used as abstract instead of the automatically truncated one. If `featured_image` presents, the image specified will show up in the post item. In this example, the `neko.jpg` is placed in the asset folder for the post.

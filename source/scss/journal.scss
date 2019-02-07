@@ -432,7 +432,8 @@ a {
   width: $extra-container-width;
   text-align: right;
   font-family: $sans-preferred-font-list;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -452,7 +453,7 @@ a {
       justify-items: center;
       width: $extra-container-width;
       padding: 15px 0;
-      font-size: 12px;
+      font-size: 11px;
       font-family: $mono-font-list;
     }
     .pagination-action {

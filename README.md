@@ -11,9 +11,9 @@ Moments piled up.
 ### Features
 
 - Simple and easy to customize
-- Concentrated on reading and writing experience
+- Concentrated on reading <del>and writing (find a Markdown editor then)</del> experience
 - Mobile-friendly & widescreen-friendly
-- Flexible comments control
+- Flexible commenting control
 
 ### Installation
 
@@ -53,7 +53,7 @@ theme: journal
 
 <div align="center"><small>↑ An example of a post item ↑</small></div>
 
-Generally speaking, a post file in source/_posts always begins with a header in the following format.
+Generally speaking, a post file in source/_posts or a page file always begins with a header in the following format.
 
 ```yaml
 ---
@@ -67,4 +67,19 @@ tags:
 ---
 ```
 
-Maybe you've already noticed that there're two new fields named `intro` and `featured_image`. These two **optional** fields are used to optimize post items' appearance. If `intro` is set, the value will be used as abstract instead of the automatically truncated one. If `featured_image` presents, the image specified will show up in the post item. In this example, the `neko.jpg` is placed in the asset folder for the post.
+Maybe you've already noticed that there're two new fields named `intro` and `featured_image`. These two **optional** fields are used to optimize post items' appearance. If `intro` is set, the value will be used as abstract instead of the automatically truncated one. If `featured_image` presents, the image specified will show up in the post item, also, the feature image will show up in the detailed post's or page's page. In this example, the `neko.jpg` is placed in the asset folder for the post or page.
+
+#### Disabling commenting
+
+You are free to choose whether or not to disable commenting on some posts or pages at all times as you like it since you're the owner.
+
+You can disable commenting just by adding one line of code in the header of a post or page file.
+
+```yaml
+---
+...
+no_comments: true
+...
+---
+```
+

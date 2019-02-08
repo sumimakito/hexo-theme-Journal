@@ -9,7 +9,9 @@
         <% if(!config.__noPager) { %>
         <% if(page.current && page.total && page.total > 1) { %>
         <div class="pagination-indicator">
-            <span style="text-align: center"><%= page.current %><br>-<br><%= page.total %></span>
+            <span style="text-align: center">
+                <%= page.current %><br><div style="display: inline-block; transform: rotate(-28deg)">-</div><br><%= page.total %>
+            </span>
         </div>
         <% } %>
 

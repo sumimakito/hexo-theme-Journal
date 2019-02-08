@@ -6,8 +6,6 @@ Moments piled up.
 
 ![](arts/screenshot.png)
 
-> This documentation is yet to be finished.
-
 ### Features
 
 - Simple and easy to customize
@@ -19,13 +17,11 @@ Moments piled up.
 
 First, `cd` into your Hexo root directory.
 
-#### Installing the EJS renderer
-
-> If you are currently using an EJS-based theme, you can then skip this step.
+#### Installing dependencies
 
 ```bash
-yarn add hexo-renderer-ejs
-npm i --save hexo-renderer-ejs # for npm users
+yarn add hexo-renderer-ejs hexo-generator-archive hexo-generator-category-enhance hexo-generator-feed hexo-generator-index hexo-generator-tag
+# or `npm i --save hexo-renderer-ejs hexo-generator-archive hexo-generator-category-enhance hexo-generator-feed hexo-generator-index hexo-generator-tag` for npm users
 ```
 
 #### Cloning the theme
@@ -47,7 +43,7 @@ theme: journal
 
 ### User Guide
 
-#### About post items
+#### Post items and pages
 
 ![](arts/post_item.png)
 
@@ -67,7 +63,59 @@ tags:
 ---
 ```
 
-Maybe you've already noticed that there're two new fields named `intro` and `featured_image`. These two **optional** fields are used to optimize post items' appearance. If `intro` is set, the value will be used as abstract instead of the automatically truncated one. If `featured_image` presents, the image specified will show up in the post item, also, the feature image will show up in the detailed post's or page's page. In this example, the `neko.jpg` is placed in the asset folder for the post or page.
+Maybe you've already noticed that there're two new fields named `intro` and `featured_image`. These two **optional** fields are used to optimize post items' appearance. 
+
+##### Intro
+
+If `intro` is set, the value will be used as abstract instead of the automatically truncated one. Also, by editing the *_config.yml* in theme _Journal._'s directory, you are able to control the truncation length for all articles.
+
+```yaml
+...
+truncate_len: 60
+...
+```
+
+##### Featured image
+
+If `featured_image` presents, the image specified will show up in the post item, also, the feature image will show up in the detailed post's or page's page. In this example, the `neko.jpg` is placed in the asset folder for the post or page.
+
+#### Title and subtitle
+
+The title area of the theme Journal. consists two parts — the title and the subtitle.
+
+<div align="center"><img src="arts/title.png" width="300"/></div>
+
+<div align="center"><small>↑ An example of the title area ↑</small></div>
+
+Edit the *_config.yml* **in theme _Journal._'s directory**:
+
+```yaml
+sidebar_title: "Journal."
+sidebar_subtitle: "隻言片語<br>於此匯聚"
+```
+
+> In `sidebar_title` and `sidebar_subtitle`, HTML is supported as the example above demonstrated.
+
+#### RSS
+
+By adding the following line to the *_config.yml* in theme _Journal._'s directory, an RSS entry will show up in the navigation drawer which points to the location specified.
+
+```yaml
+rss: atom
+```
+
+> The plugin `hexo-generator-feed` is usually required for this function.
+
+#### Commenting
+
+The theme *Journal.* natively supports two commenting services – [Livere](https://www.livere.com/) and [Disqus](https://disqus.com/). To enable commenting, you just need to add **one of** the following lines to the *_config.yml* **in theme _Journal._'s directory**.
+
+```yaml
+livere: [data-uid] on livere.com
+disqus: [short_name] on disqus.com
+```
+
+> If two fields are **both left non-empty**, two comment boxes will appear. To fix this, just leave one of the two fields empty.
 
 #### Disabling commenting
 
@@ -83,3 +131,24 @@ no_comments: true
 ---
 ```
 
+#### Page entries
+
+When a page is created, its entry will automatically show up in the global navigation drawer on the left side of the screen.
+
+#### Syntax highlighting
+
+The theme *Journal.* natively supports syntax highlighting. However, the plugin `hexo-prism-plugin` is required. You can install it by running `yarn add hexo-prism-plugin` or `npm i --save hexo-prism-plugin` **at your Hexo root directory**.
+
+#### Table of contents
+
+With the plugin `hexo-toc`, the theme *Journal.* natively supports showing the table of contents in an article. You can install it by running `yarn add hexo-toc` or `npm i --save hexo-toc` **at your Hexo root directory**.
+
+Then, you can insert `<!-- toc -->` after the header of the post file to enable table of contents.
+
+### Support the developer
+
+If you find my work awesome, would you like to buy me a cup of cappuccino? Thanks! 
+
+[PayPal.me/Makito](https://www.paypal.me/makito)
+
+<img src="arts/wxpay.png" width="300"/>

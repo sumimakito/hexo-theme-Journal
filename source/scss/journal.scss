@@ -357,7 +357,7 @@ a {
   font-family: $sans-preferred-font-list;
   padding: 20px 0 50px 0;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -434,7 +434,7 @@ a {
   text-align: right;
   font-family: $sans-preferred-font-list;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

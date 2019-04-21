@@ -4,6 +4,8 @@ Journal.
 
 Moments piled up.
 
+[Changelog](CHANGELOG.md)
+
 ![](arts/screenshot.png)
 
 ### Features

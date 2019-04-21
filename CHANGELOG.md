@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Scroll bar issues fixed and favicon support added with #11 by @drrrMikado
+
 ## 2.0.1
 
 - Added back the missing page indicator in mobile layout

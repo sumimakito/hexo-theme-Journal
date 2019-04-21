@@ -1,5 +1,5 @@
 <% if (page.total && page.total > 1) { %>
-<div class="pagination">
+<div class="pagination <%= config.__isIndex ? 'index-page' : '' %>">
     <% if (page.prev) { %>
     <a class="pagination-action" href="<%- url_for(page.prev_link) %>" style="opacity: <%= page.prev ? '1' : '0' %>">
         <% } else { %>

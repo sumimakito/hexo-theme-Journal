@@ -147,7 +147,7 @@ Then, you can insert `<!-- toc -->` after the header of the post file to enable 
 
 ### Support the developer
 
-If you find my work awesome, would you like to buy me a cup of cappuccino? Thanks! 
+If you find my work awesome and useful, please consider donating. It is your support that helps me to do better!
 
 [PayPal.me/Makito](https://www.paypal.me/makito)
 

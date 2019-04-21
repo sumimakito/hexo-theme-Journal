@@ -3,8 +3,10 @@ $back-container-background: #fcfcfc;
 $front-container-background: #ffffff;
 
 $default-font-list: "Lora", "source-han-serif-tc", serif;
-$mono-font-list: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", monospace;
-$sans-preferred-font-list: "Montserrat", "Roboto", "Source Sans Pro", "Helvetica", "Arial", $default-font-list;
+$mono-font-list: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro",
+  monospace;
+$sans-preferred-font-list: "Montserrat", "Roboto", "Source Sans Pro",
+  "Helvetica", "Arial", $default-font-list;
 //$default-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", sans-serif;
 //$sans-preferred-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", sans-serif;
 
@@ -27,7 +29,7 @@ $dark-accent: darken($color-accent, 10%);
 $deep-dark-accent: darken($color-accent, 50%);
 $color-text: $deep-dark-accent;
 
-@if lightness($color-accent)<10% {
+@if lightness($color-accent) <10% {
   $dark-accent: $color-accent;
   $deep-dark-accent: $color-accent;
   $color-text: $deep-dark-accent;
@@ -48,6 +50,10 @@ $single-column-toc-size: 14px;
 
 $h1: 30px;
 $h-diff: 3px;
+
+::-webkit-scrollbar {
+  display: none;
+}
 
 body {
   background: $back-container-background;
@@ -71,26 +77,29 @@ h1 {
 }
 
 h2 {
-  font-size: $h1 - 1*$h-diff;
+  font-size: $h1 - 1 * $h-diff;
 }
 
 h3 {
-  font-size: $h1 - 2*$h-diff;
+  font-size: $h1 - 2 * $h-diff;
 }
 
 h4 {
-  font-size: $h1 - 3*$h-diff;
+  font-size: $h1 - 3 * $h-diff;
 }
 
 h5 {
-  font-size: $h1 - 4*$h-diff;
+  font-size: $h1 - 4 * $h-diff;
 }
 
 h6 {
-  font-size: $h1 - 5*$h-diff;
+  font-size: $h1 - 5 * $h-diff;
 }
 
-textarea, select, input, button {
+textarea,
+select,
+input,
+button {
   outline: none !important;
 }
 
@@ -179,11 +188,13 @@ a {
   opacity: 0;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -256,9 +267,9 @@ a {
       width: 100%;
       height: 100%;
       background: white;
-      -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-      -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-      box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+      -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     }
   }
 }
@@ -319,7 +330,10 @@ a {
           color: $deep-dark-accent;
           &.active {
             border-right: 2px solid $color-accent;
-            background: rgba($color-accent, $drawer-menu-item-active-background-alpha);
+            background: rgba(
+              $color-accent,
+              $drawer-menu-item-active-background-alpha
+            );
             color: darken($color-accent, $drawer-menu-item-active-color-darken);
           }
         }
@@ -375,7 +389,7 @@ a {
     color: $deep-dark-accent;
     .nav-title {
       font-size: $nav-title-size;
-      line-height: $nav-title-size*1.4;
+      line-height: $nav-title-size * 1.4;
     }
     border-right: 2px solid transparent;
     .nav-subtitle {
@@ -383,7 +397,8 @@ a {
       font-size: $nav-subtitle-size;
     }
     &:hover {
-      border-right: 2px solid rgba($color-accent, $nav-item-hover-indicator-alpha);
+      border-right: 2px solid
+        rgba($color-accent, $nav-item-hover-indicator-alpha);
       background: rgba($color-accent, $nav-item-hover-background-alpha);
       color: darken($color-accent, $nav-item-hover-color-darken);
     }
@@ -405,7 +420,8 @@ a {
       transition: all 0.2s linear;
       color: $deep-dark-accent;
       &:hover {
-        border-right: 2px solid rgba($color-accent, $nav-item-hover-indicator-alpha);
+        border-right: 2px solid
+          rgba($color-accent, $nav-item-hover-indicator-alpha);
         background: rgba($color-accent, $nav-item-hover-background-alpha);
         color: darken($color-accent, $nav-item-hover-color-darken);
       }
@@ -530,7 +546,8 @@ a {
       padding: 0;
       box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
     }
-    &, > * {
+    &,
+    > * {
       .post-item-wrapper {
         cursor: hand;
         cursor: pointer;
@@ -707,9 +724,21 @@ a {
         font-weight: 600;
         font-style: normal;
         line-height: 1.5em;
-        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        background: -moz-linear-gradient(
+          top,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.75) 100%
+        ); /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+          top,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.75) 100%
+        ); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.75) 100%
+        ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#c6000000', GradientType=0); /* IE6-9 */
 
         @media screen and (max-width: $single-column-max-width) {
@@ -718,7 +747,8 @@ a {
         }
         .post-meta {
           margin: 0;
-          &, * {
+          &,
+          * {
             font-size: 16px;
           }
           .material-icons {
@@ -727,7 +757,8 @@ a {
           }
 
           @media screen and (max-width: $single-column-max-width) {
-            &, * {
+            &,
+            * {
               font-size: $single-column-post-meta-size;
             }
           }
@@ -748,7 +779,8 @@ a {
         line-height: 1.5em;
         .post-meta {
           margin: 0;
-          &, * {
+          &,
+          * {
             font-size: 16px;
           }
           .material-icons {
@@ -757,7 +789,8 @@ a {
           }
 
           @media screen and (max-width: $single-column-max-width) {
-            &, * {
+            &,
+            * {
               font-size: $single-column-post-meta-size;
             }
           }
@@ -796,7 +829,8 @@ a {
           padding: 30px;
           margin-left: 30px;
           margin-bottom: 30px;
-          &, * {
+          &,
+          * {
             font-size: $toc-size;
           }
           ul {
@@ -805,7 +839,8 @@ a {
             margin: 0;
           }
           @media screen and (max-width: $single-column-max-width) {
-            &, * {
+            &,
+            * {
               font-size: $single-column-toc-size;
             }
           }
@@ -856,6 +891,9 @@ a {
       display: flex !important;
       flex-direction: row;
       justify-content: space-between;
+      &:not(.index-page) {
+        margin-top: 15px;
+      }
       .pagination-indicator {
         display: flex;
         flex-direction: column;

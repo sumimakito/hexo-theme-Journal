@@ -9,9 +9,11 @@
     </a>
 
     <div class="nav-link-list">
+        <% if (theme.archives) { %>
         <a class="a-block no-tint nav-link-item <%= is_current('archives') && 'active' %>" href="<%= config.root + "archives" %>">
             <%= __('Archive') %>
         </a>
+        <% } %>
 
         <% if(site.pages){ %>
         <% site.pages.each(function (page){ %>

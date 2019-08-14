@@ -5,9 +5,11 @@
             <a class="a-block drawer-menu-item <%= is_home() && 'active' %>" href="<%= config.url %>">
                 <%= __('Home') %>
             </a>
+            <% if (theme.archives) { %>
             <a class="a-block drawer-menu-item <%= is_current('archives') && 'active' %>" href="<%= config.root + "archives" %>">
                 <%= __('Archive') %>
             </a>
+            <% } %>
 
             <% if(site.pages){ %>
             <% site.pages.each(function (page){ %>

@@ -98,6 +98,16 @@ sidebar_subtitle: "隻言片語<br>於此匯聚"
 
 > In `sidebar_title` and `sidebar_subtitle`, HTML is supported as the example above demonstrated.
 
+#### Archives
+
+By default, the 'Archives' entry will not appear in the navigation section. To show the 'Archives' in the navigation section, you will need to enable the archives explicitly in the theme-level *_config.yml*.
+
+```yaml
+archives: true
+```
+
+> The generation of archives will be done by `hexo-generator-archive`. So please ensure that it has been added as a dependency in your package.json.
+
 #### RSS
 
 By adding the following line to the *_config.yml* in theme _Journal._'s directory, an RSS entry will show up in the navigation drawer which points to the location specified.

@@ -13,11 +13,20 @@ config.__noPager = true
 <% include _include/side_nav.ejs %>
 <% include _include/extra_nav.ejs %>
 
+<%
+function getFeaturedImage() {
+    var featuredImage = page.featured_image;
+    if (!featuredImage) return '';
+    if (featuredImage.startsWith("http://") || featuredImage.startsWith("https://")) return featuredImage;
+    return config.root + page.path + featuredImage;
+}
+%>
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             <div class="<%= page.featured_image ? 'post-head-wrapper' : 'post-head-wrapper-text-only' %>"
-                 style="background-image: url('<%= page.featured_image ? (config.root + page.path + page.featured_image) : '' %>')">
+                 style="background-image: url('<%= getFeaturedImage() %>')">
                 <div class="post-title">
                     <%= page.title %>
                     <% if(page.date && page.date.length > 0) { %>

@@ -81,6 +81,8 @@ truncate_len: 60
 
 If `featured_image` presents, the image specified will show up in the post item, also, the feature image will show up in the detailed post's or page's page. In this example, the `neko.jpg` is placed in the asset folder for the post or page.
 
+**New in 2.0.3:** `featured_image` can now be an URL starts with `http://` or `https://`.
+
 #### Title and subtitle
 
 The title area of the theme Journal. consists two parts — the title and the subtitle.

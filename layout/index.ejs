@@ -8,6 +8,15 @@ config.__isIndex = true
 <% include _include/side_nav.ejs %>
 <% include _include/extra_nav.ejs %>
 
+<%
+function getFeaturedImage(item) {
+    var featuredImage = item.featured_image;
+    if (!featuredImage) return '';
+    if (featuredImage.startsWith("http://") || featuredImage.startsWith("https://")) return featuredImage;
+    return config.root + item.path + featuredImage;
+}
+%>
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-no-background">
         <% page.posts.each(function (item) { %>
@@ -31,7 +40,7 @@ config.__isIndex = true
                     <% if(item.featured_image){ %>
                     <div class="post-item-image-wrapper">
                         <div class="post-item-image"
-                             style="background-image: url('<%= config.root + item.path + item.featured_image %>')"></div>
+                             style="background-image: url('<%= getFeaturedImage(item) %>')"></div>
                     </div>
                     <% } %>
                 </div>

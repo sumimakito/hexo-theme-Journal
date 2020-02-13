@@ -30,13 +30,13 @@
 </script>
 <% } else if(theme.valine){ %>
 <script>
-		var id = '<%= theme.valine.AppID %>'
-		var key = '<%= theme.valine.AppKey %>'
+        var id = '<%= theme.valine.AppID %>'
+        var key = '<%= theme.valine.AppKey %>'
         new Valine({
             el: '#vcomments',
             appId: id,
             appKey: key,
-			placeholder: 'Comment here!'
+            placeholder: 'Comment here!'
         })
 </script>
 <% }%>

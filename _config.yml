@@ -9,3 +9,6 @@ rss: atom.xml
 # Please do not use the two services at the same time.
 livere: # [data-uid] for livere.com
 disqus: # [short_name] for disqus.com
+valine: # If you use valine, please enter both [AppID] and [AppKey] below. See details at valine.js.org
+  AppID: 
+  AppKey: 
